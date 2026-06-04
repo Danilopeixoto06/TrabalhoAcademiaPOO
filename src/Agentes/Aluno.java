@@ -1,5 +1,5 @@
 package Agentes;
 
-public class Aluno {
+public class Aluno extends Pessoa{
 
 }
