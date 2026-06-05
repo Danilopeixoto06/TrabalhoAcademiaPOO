@@ -1,5 +1,9 @@
-package Agentes;
+package agentes;
 
-public class Atendente extends Pessoa{
+public class Atendente {
+
+	public Atendente() {
+		// TODO Auto-generated constructor stub
+	}
 
 }

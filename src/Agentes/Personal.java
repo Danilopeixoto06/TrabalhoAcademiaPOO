@@ -1,8 +1,8 @@
 package agentes;
 
-public class Administrador {
+public class Personal {
 
-	public Administrador() {
+	public Personal() {
 		// TODO Auto-generated constructor stub
 	}
 
