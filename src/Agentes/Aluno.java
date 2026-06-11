@@ -1,9 +1,12 @@
 package agentes;
 
-public class Aluno {
+public class Aluno extends Pessoa{
 
 	public Aluno() {
-		// TODO Auto-generated constructor stub
 	}
-
+	
+	public Aluno(String nome, double cpf, int idade) {
+		super(nome, cpf, idade);
+		System.out.println("Aluno cadastrado com sucesso!");
+	}
 }

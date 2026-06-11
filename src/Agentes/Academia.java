@@ -1,8 +1,8 @@
 package agentes;
 
-public class Atendente extends Pessoa{
+public class Academia {
 
-	public Atendente() {
+	public Academia() {
 		// TODO Auto-generated constructor stub
 	}
 
