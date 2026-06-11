@@ -4,7 +4,6 @@ public abstract class Pessoa {
 	private String nome;
 	private double cpf;
 	private int idade;
-	private int peso;
 	
 	public Pessoa() {}
 	
