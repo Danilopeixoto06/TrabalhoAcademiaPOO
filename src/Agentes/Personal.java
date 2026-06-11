@@ -2,7 +2,7 @@ package agentes;
 
 public class Personal extends Pessoa{
 
-	public Personal() {
+	public Personal(Academia academia) {
 		// TODO Auto-generated constructor stub
 	}
 	

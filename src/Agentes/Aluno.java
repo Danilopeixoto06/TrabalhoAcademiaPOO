@@ -2,7 +2,7 @@ package agentes;
 
 public class Aluno extends Pessoa{
 
-	public Aluno() {
+	public Aluno(Academia academia) {
 	}
 	
 	public Aluno(String nome, double cpf, int idade) {
