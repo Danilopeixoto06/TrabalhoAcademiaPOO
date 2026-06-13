@@ -1,0 +1,9 @@
+package Modelo;
+
+public class Atendente extends Funcionario{
+	
+	public Atendente(String nome, String cpf, int idade, double salario) {
+		super(nome, cpf, idade,salario);
+	}
+	
+}
