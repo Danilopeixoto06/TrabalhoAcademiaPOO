@@ -1,4 +1,4 @@
-package Modelo;
+package modelo;
 
 public class AulaExtra {
 	private String tipo;

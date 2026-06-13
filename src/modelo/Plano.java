@@ -1,4 +1,4 @@
-package Modelo;
+package modelo;
 
 public abstract class Plano {
 	//o valor base é igual pra todos

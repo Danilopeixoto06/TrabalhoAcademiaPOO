@@ -1,4 +1,4 @@
-package Modelo;
+package modelo;
 
 public class Aluno extends Pessoa{
 	private double peso;

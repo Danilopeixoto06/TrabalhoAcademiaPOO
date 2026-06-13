@@ -1,4 +1,4 @@
-package Modelo;
+package modelo;
 
 //clasee abstract para evitar de criar alguem que não é funcionario ou atendente, pois pra isso ela precisa ter um salario
 public abstract class Funcionario extends Pessoa{
