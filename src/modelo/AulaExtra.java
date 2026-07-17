@@ -3,7 +3,12 @@ package modelo;
 public class AulaExtra {
 	private String tipo;
 	private int vagas;
-	private final int LIMITE_MAXIMO = 30;
+	private final int LIMITE_MAXIMO = 30; 
+	
+	public AulaExtra (String tipo, int vagas) {
+		this.tipo = tipo;
+		this.setVagas(vagas); 
+	}
 	
 	public String getTipo() {
 		return tipo;
@@ -21,13 +26,7 @@ public class AulaExtra {
         if (vagas >= 0 && vagas <= LIMITE_MAXIMO) {
             this.vagas = vagas;
         } else {
-            System.out.println("Número de vagas inválido. O limite da sala é de " + LIMITE_MAXIMO + " pessoas.");
+            System.out.println("ERRO: Número de vagas inválido. O limite da sala é de " + LIMITE_MAXIMO + " pessoas.");
         }
     }
-
-	public AulaExtra (String tipo, int vagas) {
-		this.tipo = tipo;
-		this.vagas = LIMITE_MAXIMO;
-	}
-	
 }

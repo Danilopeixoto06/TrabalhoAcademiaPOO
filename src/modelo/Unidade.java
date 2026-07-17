@@ -6,7 +6,7 @@ import java.util.List;
 public class Unidade {
 	private String nome;
 	private String endereço;
-	// Listas para armazenar as pessoas que pertencem a esta unidade
+	// Listas para armazenar as pessoas que pertencem a esta unidade.
 	private List<Aluno> alunos;
 	private List<Atendente> atendentes;
 	private List<Instrutor> instrutores;
