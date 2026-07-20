@@ -4,7 +4,11 @@ public class PlanoMensal extends Plano{
 	
 	@Override
     public double calcularMensalidade() {
-        // apenas retorna o valor base
+        
         return valorBase;
     }
+	@Override
+	public int getValidadeMeses() {
+		return 1;
+	}
 }

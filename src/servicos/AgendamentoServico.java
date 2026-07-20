@@ -3,6 +3,8 @@ package servicos;
 import modelo.Aluno;
 import modelo.AulaExtra;
 
+//Sistema de agendamento
+
 public class AgendamentoServico {
 
     public void matricularEmAula(Aluno aluno, AulaExtra aula) {

@@ -2,44 +2,54 @@ package servicos;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-
 import modelo.Aluno;
 import modelo.Plano;
 
+// Sistema financeiro
+
 public class FinanceiroServico {
 
-    public void processarPagamento(Aluno aluno, Plano plano, boolean pagamentoEfetuado) {
-        System.out.println("\n--- Processando fatura para o aluno: " + aluno.getNome() + " ---");
+    public void processarPagamento(Aluno aluno, boolean pagamentoEfetuado) {
+        System.out.println("Fatura do aluno: " + aluno.getNome());
         
-        // meses atrasados
-        long mesesAtraso = ChronoUnit.MONTHS.between(aluno.getDataMatricula(), LocalDate.now());
+        // pegamos o plano do aluno
+       
+        Plano planoAluno = aluno.getPlano();
         
-        // Atualiza o status do aluno
+        // calculamos o tempo desde a matricula
+        int mesesDesdeMatricula = (int) ChronoUnit.MONTHS.between(aluno.getDataMatricula(), LocalDate.now());
+        
+        // os meses de acordo com o plano
+        int validadeDoPlano = planoAluno.getValidadeMeses();
+        
+        // o atraso só acontece se o tempo decorrido for maior que o plano que foi contratado
+        int mesesAtraso = 0;
+        if (mesesDesdeMatricula > validadeDoPlano) {
+            mesesAtraso = (int) (mesesDesdeMatricula - validadeDoPlano);
+        }
+        
+        // atualiza o status de inadimplência
         if (mesesAtraso > 0) {
             aluno.setInadimplente(true);
-            System.out.println("Status Inicial: INADIMPLENTE (" + mesesAtraso + " meses de atraso).");
+            System.out.println("Esta inadimplente.");
         } else {
-            System.out.println("Status Inicial: ADIMPLENTE (Em dia).");
+            System.out.println("Esta adimplente.");
         }
 
-        // Calcula a mensalidade e a multa através do Polimorfismo
-        double valorMensalidade = plano.calcularMensalidade();
-        double valorMulta = plano.calcularMulta((int) mesesAtraso); 
-        
-        double totalAPagar = valorMensalidade + valorMulta;
+        double valorMensalidade = planoAluno.calcularMensalidade();
+        double valorMulta = planoAluno.calcularMulta(mesesAtraso); 
+        double total= valorMensalidade + valorMulta;
 
-        System.out.println("Valor da Mensalidade: R$ " + valorMensalidade);
-        System.out.println("Valor da Multa: R$ " + valorMulta);
-        System.out.println("TOTAL: R$ " + totalAPagar);
+        System.out.println("Valor da Mensalidade: " + valorMensalidade);
+        System.out.println("Valor da Multa: " + valorMulta);
+        System.out.println("Total a ser pago: " + total);
         
-        // verificação
         if (pagamentoEfetuado) {
-            System.out.println("Pagamento recebido pelo sistema!");
-            aluno.setInadimplente(false); // Limpa o registo do aluno e liberta a catraca
+            System.out.println("Pagamento recebido");
+            aluno.setInadimplente(false); 
+          
         } else {
-            System.out.println("\nPagamento foi recusado ou cancelado pelo aluno.");
-            System.out.println("O acesso à academia permanece bloqueado.");
-            // só muda se ele pagar
+            System.out.println("Pagamento recusado");
         }
     }
 }

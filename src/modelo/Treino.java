@@ -14,12 +14,11 @@ public class Treino {
         this.exercicios = new ArrayList<>();
     }
 
-    // Método para ir adicionando exercícios na ficha
+    // metodo para ir adicionando exercícios na ficha
     public void adicionarExercicio(Exercicio exercicio) {
         this.exercicios.add(exercicio);
     }
 
-    // Getters e Setters
     public String getObjetivo() { return objetivo; }
     public void setObjetivo(String objetivo) { this.objetivo = objetivo; }
     public Instrutor getInstrutorResponsavel() { return instrutorResponsavel; }

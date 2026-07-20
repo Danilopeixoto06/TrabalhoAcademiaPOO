@@ -4,8 +4,8 @@ package modelo;
 public abstract class Funcionario extends Pessoa{
 	private double salario;
 	
-	public Funcionario (String nome, String cpf, int idade, double salario) {
-		super(nome, cpf, idade);
+	public Funcionario (String nome, int idade, double salario) {
+		super(nome, idade);
 		this.salario = salario;
 	}
 

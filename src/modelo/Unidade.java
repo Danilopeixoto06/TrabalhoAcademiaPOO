@@ -21,6 +21,18 @@ public class Unidade {
         this.instrutores = new ArrayList<>();
         this.equipamentos = new ArrayList<>();
 	}
+	public void adicionarAluno(Aluno aluno) {
+        this.alunos.add(aluno);
+    }
+
+    public void adicionarAtendente(Atendente atendente) {
+        this.atendentes.add(atendente);
+    }
+
+    public void adicionarInstrutor(Instrutor instrutor) {
+        this.instrutores.add(instrutor);
+    }
+    
 	
 	public String getNome() {
 		return nome;
