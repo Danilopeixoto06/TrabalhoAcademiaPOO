@@ -1,4 +1,4 @@
-package modelo;
+package academia;
 
 public class Equipamento {
 	private String nome;

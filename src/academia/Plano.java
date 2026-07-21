@@ -1,11 +1,11 @@
-package modelo;
+package academia;
 
 public abstract class Plano {
 	//o valor base é igual pra todos
-	//protect para os filhos acessarem diretamente com o this
-	protected double valorBase = 100.0;
+	private double valorBase = 100.0;
 
-    public abstract double calcularMensalidade();
+
+	public abstract double calcularMensalidade();
     
     public abstract int getValidadeMeses();
 
@@ -13,4 +13,12 @@ public abstract class Plano {
     public double calcularMulta(int mesesAtraso) {
         return 30.0 * mesesAtraso;
     }
+    public double getValorBase() {
+		return valorBase;
+	}
+
+	public void setValorBase(double valorBase) {
+		this.valorBase = valorBase;
+	}
 }
+

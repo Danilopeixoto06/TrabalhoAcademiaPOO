@@ -1,4 +1,4 @@
-package modelo;
+package academia;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,6 @@ import java.util.List;
 public class Unidade {
 	private String nome;
 	private String endereço;
-	// Listas para armazenar as pessoas que pertencem a esta unidade.
 	private List<Aluno> alunos;
 	private List<Atendente> atendentes;
 	private List<Instrutor> instrutores;
@@ -15,7 +14,7 @@ public class Unidade {
 	public Unidade(String nome, String endereco) {
 		this.nome = nome;
 		this.endereço = endereco;
-		// Inicialização das listas
+		
 		this.alunos = new ArrayList<>();
         this.atendentes = new ArrayList<>();
         this.instrutores = new ArrayList<>();
@@ -33,29 +32,48 @@ public class Unidade {
         this.instrutores.add(instrutor);
     }
     
-	
+    public void adicionarEquipamento(Equipamento equipamento) {
+    	this.equipamentos.add(equipamento);
+    }
+    
 	public String getNome() {
 		return nome;
 	}
-
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 	public String getEndereço() {
 		return endereço;
 	}
-
+	public void setEndereço(String endereço) {
+		this.endereço = endereço;
+	}
 	public List<Aluno> getAlunos() {
 		return alunos;
 	}
-
+	public void setAlunos(List<Aluno> alunos) {
+		this.alunos = alunos;
+	}
 	public List<Atendente> getAtendentes() {
 		return atendentes;
 	}
-
+	public void setAtendentes(List<Atendente> atendentes) {
+		this.atendentes = atendentes;
+	}
 	public List<Instrutor> getInstrutores() {
 		return instrutores;
 	}
-
+	public void setInstrutores(List<Instrutor> instrutores) {
+		this.instrutores = instrutores;
+	}
 	public List<Equipamento> getEquipamentos() {
 		return equipamentos;
 	}
+	public void setEquipamentos(List<Equipamento> equipamentos) {
+		this.equipamentos = equipamentos;
+	}
+    
+	
+	
 	
 }

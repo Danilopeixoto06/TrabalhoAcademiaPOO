@@ -1,87 +1,125 @@
 package main;
 
-import modelo.Aluno;
-import modelo.Atendente;
-import modelo.AulaExtra;
-import modelo.AvaliacaoFisica;
-import modelo.Equipamento;
-import modelo.Exercicio;
-import modelo.Instrutor;
-import modelo.Plano;
-import modelo.PlanoAnual;
-import modelo.PlanoMensal;
-import modelo.Treino;
-import modelo.Unidade;
-import servicos.AgendamentoServico;
-import servicos.FinanceiroServico;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import academia.Administrador;
+import academia.Aluno;
+import academia.Atendente;
+import academia.AulaExtra;
+import academia.Equipamento;
+import academia.Exercicio;
+import academia.Instrutor;
+import academia.Plano;
+import academia.PlanoAnual;
+import academia.PlanoMensal;
+import academia.Unidade;
+import sistema.Financeiro;
 
 public class Main {
+
     public static void main(String[] args) {
-
-        // criando unidade e funcionários
-        Unidade unidadeCentro = new Unidade("Academia Fit - Matriz", "Rua Principal, 123");
-        Atendente atendente = new Atendente("Maria Recepcionista", "111.111.111-11", 25, 1500.0);
-        Instrutor instrutor = new Instrutor("Carlos Personal", "222.222.222-22", 30, 2500.0);
-
-        unidadeCentro.getAtendentes().add(atendente);
-        unidadeCentro.getInstrutores().add(instrutor);
-
-        // cadastrando o aluno e a 1° avaliação física
-        System.out.println("Atendente " + atendente.getNome() + " está matriculando um novo aluno");
-        Aluno alunoJoao = new Aluno("João Silva", "333.333.333-33", 28, "hipertrofia");
-        unidadeCentro.getAlunos().add(alunoJoao);
-
-        AvaliacaoFisica avaliacaoInicial = new AvaliacaoFisica(80.5, 18.5, 42.0);
-        alunoJoao.adicionarAvaliacao(avaliacaoInicial);
-
-        FinanceiroServico financeiro = new FinanceiroServico();
-        Plano planoJoao = new PlanoAnual(); 
         
-        financeiro.processarPagamento(alunoJoao, planoJoao, true);
+        System.out.println("Iniciando teste");
+        System.out.println();
 
-        // O treino 
-        System.out.println("\n---Montando a Ficha de Treino ---");
-        Treino treinoJoao = new Treino("Adaptação e Força", instrutor);
+        System.out.println("Criando um administrador");
+        System.out.println();
+        Administrador admin = new Administrador("Administrador Joao", 45);
+        System.out.println("Administrador cria a unidade UFCAFIT");
         
-        // Adicionando exercícios soltos dentro do treino
-        treinoJoao.adicionarExercicio(new Exercicio("Supino Reto", 3, 12));
-        treinoJoao.adicionarExercicio(new Exercicio("Agachamento Livre", 4, 10));
-        treinoJoao.adicionarExercicio(new Exercicio("Esteira", 1, 20)); 
+        Unidade unidadeCentro = admin.cadastrarUnidade("UFCAFIT", "Rua das cadeiras 123");
         
-        // relacionando o treino ao aluno
-        alunoJoao.setTreinoAtual(treinoJoao);
-        System.out.println("Treino montado pelo instrutor " + alunoJoao.getTreinoAtual().getInstrutorResponsavel().getNome() + " com " + alunoJoao.getTreinoAtual().getExercicios().size() + " exercícios.");
+        System.out.println("Definindo o preço dos planos");
+        Plano planoMensal = new PlanoMensal();
+        admin.definirPrecoPlano(planoMensal, 100.0);
+        System.out.println();
 
-        // 5. Agendamento de Aula Extra
-        AulaExtra aulaPilates = new AulaExtra("Pilates", 30); // Limite de 30 vagas configurado lá na classe
-        AgendamentoServico agendamento = new AgendamentoServico();
+        System.out.println("Contratando funcionários");
+        Atendente atendente1 = new Atendente("Mariana", 20, 1600.0);
+        Instrutor instrutor1 = new Instrutor("Roberto", 25, 3000.0);
+
+        admin.contratarAtendente(unidadeCentro, atendente1);
+        admin.contratarInstrutor(unidadeCentro, instrutor1);
+        System.out.println();
+
+        System.out.println("Matrícula do aluno pelo atendente");
+        Aluno aluno1 = atendente1.realizarMatricula(unidadeCentro,100.0,"Lucas",22,"Hipertrofia",75.5,18.0,40.0);
+        System.out.println();
+
+        System.out.println("Instrutor montando o treino");
+        List<Exercicio> fichaExercicios = new ArrayList<>();
+        Exercicio ex1 = new Exercicio("Supino Reto", 4, 10);
+        Exercicio ex2 = new Exercicio("Agachamento Livre", 4, 12);
+        Exercicio ex3 = new Exercicio("Pull-up", 3, 12);
+        fichaExercicios.add(ex1);
+        fichaExercicios.add(ex2);
+        fichaExercicios.add(ex3);
+
+        instrutor1.montarTreino(aluno1, "Hipertrofia com foco na parte superior", fichaExercicios);
+        System.out.println();
+
+        aluno1.visualizarTreinoAtual();
+        System.out.println();
+
+        System.out.println("Iniciando a aula extra com presença");
+
+        AulaExtra aulaPilates = new AulaExtra("Pilates", 1);
+
+        aulaPilates.inscreverAluno(aluno1);
+
+        // para testar quando o aluno tenta se inscrever e nao tem vaga
+        Plano planoA = new PlanoAnual();
+        Aluno aluno2 = new Aluno("Ana", 20, planoA, "Emagrecimento", null);
+        aulaPilates.inscreverAluno(aluno2);
+
+        // instrutor grava a presença
+        instrutor1.presenca(aluno1, aulaPilates);
         
-        // verificando vagas e matricula
-        agendamento.matricularEmAula(alunoJoao, aulaPilates);
+        // para verificar se o instrutor tentar marcar a presença 2x
+        instrutor1.presenca(aluno1, aulaPilates);
+        System.out.println();
+
+        System.out.println("Inspeção dos equipamentos");
+        Equipamento esteira = new Equipamento("Esteira 01");
+        unidadeCentro.adicionarEquipamento(esteira);
+
+        instrutor1.registrarManutencao(esteira);
+        System.out.println("Esteira em manutenção? " + esteira.isEmManutencao());
         
-        // --- TESTES DAS FUNCIONALIDADES RESTANTES ---
+        instrutor1.liberarEquipamento(esteira);
+        System.out.println("Esteira em manutenção? " + esteira.isEmManutencao());
+        System.out.println();
 
-        System.out.println("\n---Teste de Equipamentos---");
-        Equipamento extensora = new Equipamento("Extensora LIFE");
-        unidadeCentro.getEquipamentos().add(extensora);
+        System.out.println("Sistema financeiro e verificando status de pagamento");
+        Financeiro financeiro = new Financeiro();
         
-        System.out.println("O equipamento " + extensora.getNome() + " está funcionando?");
-        // O instrutor verifica o estado da maquina
-        extensora.setEmManutencao(true);
-        System.out.println("Estado atualizado: Em manutenção? " + extensora.isEmManutencao());
-
-
-        System.out.println("\n---Teste de Turma Lotada---");
-        AulaExtra aulaCrossfit = new AulaExtra("Crossfit", 0); // Simulando uma turma já cheia!
-        agendamento.matricularEmAula(alunoJoao, aulaCrossfit);
-
-
-        System.out.println("\n---Teste de Pagamento Recusado e Outro Plano---");
-        // Criando a aluna Maria com um plano diferente (Mensal, sem os 20% de desconto)
-        Aluno alunaMaria = new Aluno("Maria Santos", "444.444.444-44", 22, "emagrecimento");
-        Plano planoMaria = new PlanoMensal(); 
+        System.out.println("Pagamento em dia");
+        financeiro.processarPagamento(aluno1, true);
+        System.out.println();
+        System.out.println("Status de inadimplência: " + aluno1.isInadimplente());
+        System.out.println();
         
-        // A Maria tentou pagar, mas o cartão deu erro 
-        financeiro.processarPagamento(alunaMaria, planoMaria, false);
+        System.out.println("Atraso de 3 meses no plano mensal");
+        // alteramos a data da matricula para 3 meses atras
+        aluno1.setDataMatricula(LocalDate.now().minusMonths(3));
+        financeiro.processarPagamento(aluno1, false);
+        System.out.println();
+        System.out.println("Status de inadimplência: " + aluno1.isInadimplente());
+        //nesse caso sera cobrado a multa referente a 2 meses
+        System.out.println();
+        
+        System.out.println("Pagando a dívida");
+        financeiro.processarPagamento(aluno1, true);
+        System.out.println();
+        System.out.println("Status de inadimplência: "+ aluno1.isInadimplente());
+        System.out.println();
+        
+        System.out.println("Demissao de funcionario (Atendente)");
+        admin.demitirAtendente(unidadeCentro, atendente1);
+        System.out.println();
+
+        System.out.println("Finalizando teste");
     }
 }

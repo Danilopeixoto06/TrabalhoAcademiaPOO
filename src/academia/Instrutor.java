@@ -1,4 +1,4 @@
-package modelo;
+package academia;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ public class Instrutor extends Funcionario{
 	}
 	
 	public void montarTreino(Aluno aluno, String objetivoTreino, List<Exercicio> listaDeExercicios) {
-        System.out.println("O instrutor" + this.getNome() +" está montando o treino para " + aluno.getNome());
+        System.out.println("O instrutor " + this.getNome() +" está montando o treino para " + aluno.getNome());
         
         //o this serve para passarmos o proprio instrutor como responsavel 
         Treino novoTreino = new Treino(objetivoTreino, this);
@@ -21,8 +21,13 @@ public class Instrutor extends Funcionario{
         
         // associamos esse treino diretamente ao cadastro do aluno
         aluno.setTreinoAtual(novoTreino);
-        System.out.println("Treino associado ao aluno");
+        System.out.println("Treino associado ao aluno "+ aluno.getNome());
     }
+	
+	public void realizarAvaliacaoFisica(Aluno aluno, double peso, double percGord, double percMusc) {
+	    AvaliacaoFisica novaAvaliacao = new AvaliacaoFisica(peso, percGord, percMusc);
+	    aluno.adicionarAvaliacao(novaAvaliacao);
+	}
 	
 	public void registrarManutencao(Equipamento equipamento) {
         equipamento.setEmManutencao(true);
@@ -36,8 +41,7 @@ public class Instrutor extends Funcionario{
 	public void presenca(Aluno aluno, AulaExtra aula) {
         // O instrutor adiciona o aluno na lista de presença
         aula.adicionarPresencaAluno(aluno);
-        System.out.println("Instrutor "+ this.getNome() +" adicionou" 
-                            + aluno.getNome() +" na aula de "+ aula.getTipo());
+        System.out.println("Presença checada pelo instrutor " + this.getNome());
     }
 	
 	

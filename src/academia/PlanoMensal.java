@@ -1,11 +1,11 @@
-package modelo;
+package academia;
 
 public class PlanoMensal extends Plano{
 	
 	@Override
     public double calcularMensalidade() {
         
-        return valorBase;
+        return getValorBase();
     }
 	@Override
 	public int getValidadeMeses() {

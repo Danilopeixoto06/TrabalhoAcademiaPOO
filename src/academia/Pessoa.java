@@ -1,4 +1,4 @@
-package modelo;
+package academia;
 
 //classe do tipo abstract para evitar de criar alguem com nome,idade e não ser aluno, pra isso ele precisa de uma objetivo e peso
 public abstract class Pessoa {

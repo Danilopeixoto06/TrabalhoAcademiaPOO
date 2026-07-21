@@ -1,13 +1,14 @@
-package servicos;
+package sistema;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import modelo.Aluno;
-import modelo.Plano;
+
+import academia.Aluno;
+import academia.Plano;
 
 // Sistema financeiro
 
-public class FinanceiroServico {
+public class Financeiro {
 
     public void processarPagamento(Aluno aluno, boolean pagamentoEfetuado) {
         System.out.println("Fatura do aluno: " + aluno.getNome());

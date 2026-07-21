@@ -1,4 +1,4 @@
-package modelo;
+package academia;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -15,13 +15,18 @@ public class Aluno extends Pessoa{
 	
 	
 	//o objeto inadimplente não é passada como parametro pq se fosse passado o atendente sempre precisaria colocar false, sendo que ninguem é cadastrado e já está inadimplente
-	public Aluno(String nome, int idade, Plano plano, String objetivo) {
+	public Aluno(String nome, int idade, Plano plano, String objetivo,AvaliacaoFisica primeiraAvaliacao) {
 		super(nome,idade);
 		this.plano=plano;
 		this.objetivo = objetivo;
 		this.inadimplente = false;
 		this.dataMatricula = LocalDate.now(); // Grava a data em que o aluno foi matriculado
         this.historicoAvaliacoes = new ArrayList<>();
+        // coloquei esse if para garantir que a alaviacao foi passada e evitar que adicionemos um objeto nulo, dando erro no main
+        if (primeiraAvaliacao != null) {
+        	this.historicoAvaliacoes.add(primeiraAvaliacao);
+        }
+        
 	}
 	
 	public boolean podeFazerAvaliacao() {
@@ -55,6 +60,10 @@ public class Aluno extends Pessoa{
 	 }
 	
 	public void visualizarTreinoAtual() {
+		if (this.treinoAtual == null) {
+			System.out.println("O aluno " + this.getNome()+ " nao possui treino");
+			return;
+		}
 		System.out.println("Treino de " +this.getNome() + " Objetivo: "+ this.treinoAtual.getObjetivo());
 		
 		
@@ -78,12 +87,15 @@ public class Aluno extends Pessoa{
 	public void setHistoricoAvaliacoes(List<AvaliacaoFisica> historicoAvaliacoes) {
 		this.historicoAvaliacoes = historicoAvaliacoes;
 	}
+	
+	public LocalDate getDataMatricula() {
+		return dataMatricula;
+	}
 
 	public void setDataMatricula(LocalDate dataMatricula) {
 		this.dataMatricula = dataMatricula;
 	}
 
-	//getters e setters
 	public String getObjetivo() {
 		return objetivo;
 	}
@@ -101,9 +113,6 @@ public class Aluno extends Pessoa{
 	}
 	public void setTreinoAtual(Treino treinoAtual) { 
 		this.treinoAtual = treinoAtual; 
-	}
-	public LocalDate getDataMatricula() { 
-		return dataMatricula;
 	}
 	
 }

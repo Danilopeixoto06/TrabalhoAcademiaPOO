@@ -1,4 +1,4 @@
-package modelo;
+package academia;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +19,29 @@ public class Treino {
         this.exercicios.add(exercicio);
     }
 
-    public String getObjetivo() { return objetivo; }
-    public void setObjetivo(String objetivo) { this.objetivo = objetivo; }
-    public Instrutor getInstrutorResponsavel() { return instrutorResponsavel; }
-    public void setInstrutorResponsavel(Instrutor instrutorResponsavel) { this.instrutorResponsavel = instrutorResponsavel; }
-    public List<Exercicio> getExercicios() { return exercicios; }
+	public String getObjetivo() {
+		return objetivo;
+	}
+
+	public void setObjetivo(String objetivo) {
+		this.objetivo = objetivo;
+	}
+
+	public Instrutor getInstrutorResponsavel() {
+		return instrutorResponsavel;
+	}
+
+	public void setInstrutorResponsavel(Instrutor instrutorResponsavel) {
+		this.instrutorResponsavel = instrutorResponsavel;
+	}
+
+	public List<Exercicio> getExercicios() {
+		return exercicios;
+	}
+
+	public void setExercicios(List<Exercicio> exercicios) {
+		this.exercicios = exercicios;
+	}
+
+   
 }
