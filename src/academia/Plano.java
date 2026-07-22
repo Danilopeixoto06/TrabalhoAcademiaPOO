@@ -2,7 +2,7 @@ package academia;
 
 public abstract class Plano {
 	//o valor base é igual pra todos
-	private double valorBase = 100.0;
+	private static double valorBase = 100.0;
 
 
 	public abstract double calcularMensalidade();
@@ -17,8 +17,8 @@ public abstract class Plano {
 		return valorBase;
 	}
 
-	public void setValorBase(double valorBase) {
-		this.valorBase = valorBase;
+	public static void setValorBase(double valorNovo) {
+		valorBase = valorNovo;
 	}
 }
 

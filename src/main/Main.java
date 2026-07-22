@@ -45,7 +45,8 @@ public class Main {
         System.out.println();
 
         System.out.println("Matrícula do aluno pelo atendente");
-        Aluno aluno1 = atendente1.realizarMatricula(unidadeCentro,100.0,"Lucas",22,"Hipertrofia",75.5,18.0,40.0);
+        Aluno aluno1 = atendente1.realizarMatricula(unidadeCentro,100.0,"Lucas",22,"Hipertrofia",75.5,10.0,40.0);
+        Aluno aluno2 = atendente1.realizarMatricula(unidadeCentro, 540.0, "Ana", 20, "Emagrecimento", 90.0, 25.0, 20.0);
         System.out.println();
 
         System.out.println("Instrutor montando o treino");
@@ -70,8 +71,6 @@ public class Main {
         aulaPilates.inscreverAluno(aluno1);
 
         // para testar quando o aluno tenta se inscrever e nao tem vaga
-        Plano planoA = new PlanoAnual();
-        Aluno aluno2 = new Aluno("Ana", 20, planoA, "Emagrecimento", null);
         aulaPilates.inscreverAluno(aluno2);
 
         // instrutor grava a presença
@@ -114,6 +113,25 @@ public class Main {
         financeiro.processarPagamento(aluno1, true);
         System.out.println();
         System.out.println("Status de inadimplência: "+ aluno1.isInadimplente());
+        System.out.println();
+        
+        System.out.println("Instrutor tentando fazer avaliação física antes de completar 1 mês");
+        instrutor1.realizarAvaliacaoFisica(aluno2, 60.0, 20.0, 30.0);
+        System.out.println("Histórico de avaliações da Ana: " + aluno2.getHistoricoAvaliacoes().size());
+        System.out.println();
+
+        System.out.println("Instrutor fazendo avaliação física no aluno Lucas que ja possui mais de 1 mes de matrícula");
+        // colocamos o valor da data da ultima matricula de lucas para 1 mes atras
+        aluno1.getHistoricoAvaliacoes().get(0).setDataAvaliacao(LocalDate.now().minusMonths(1));
+        instrutor1.realizarAvaliacaoFisica(aluno1, 74.0, 16.5, 42.0);
+        System.out.println("Histórico de avaliações do Lucas: " + aluno1.getHistoricoAvaliacoes().size());
+        System.out.println();
+        
+        System.out.println("Administrador mudando o preço base");
+        System.out.println();
+        admin.definirPrecoPlano(aluno1.getPlano(), 120.00);
+        System.out.println("Novo valor do plano do Lucas: " + (aluno1.getPlano().getValidadeMeses() * aluno1.getPlano().calcularMensalidade()));
+        System.out.println("Novo valor do plano da Ana: " + (aluno2.getPlano().getValidadeMeses() * aluno2.getPlano().calcularMensalidade()));
         System.out.println();
         
         System.out.println("Demissao de funcionario (Atendente)");
